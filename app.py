@@ -15,7 +15,7 @@ merge = pd.merge(예약, 참석.groupby(by="날짜").count(), on=["날짜"], how
 # 예약 이벤트 생성
 예약_events = []
 for _, row in merge.iterrows():
-    color = "#3D9DF3" if (row["정원"] == row["참석자"]) else "#FFE46C"
+    color = "#3D9DF3" if (row["정원"] == row["참석자"]) else "#FFDD6CAF"
     예약_events.append({
         "title": f" 예약: {row['예약자']}({row['정원']})",
         "start": row['날짜'],
