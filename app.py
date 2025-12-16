@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from streamlit_calendar import calendar
+import datetime
 
 st.set_page_config(page_title="캘린더", page_icon="🎾")
 
@@ -37,13 +38,24 @@ for _, row in 참석.iterrows():
 # 전체 이벤트 합치기
 events = 예약_events + 참석_events
 
-# Calendar 옵션
 calendar_options = {
     "editable": "true",
     "navLinks": "true",
+    # "resources": calendar_resources,
     "selectable": "true",
+}
+
+# Calendar 옵션
+calendar_options = {
+    **calendar_options,
+    "headerToolbar": {
+        "left": "today prev,next",
+        "center": "title",
+        # "right": "dayGridDay,dayGridWeek,dayGridMonth",
+        "right": "dayGridMonth",
+    },
+    "initialDate": datetime.datetime.today().strftime("%Y-%m-%d"),
     "initialView": "dayGridMonth",
-    "initialDate": "2025-12-01",
 }
 
 # 캘린더 출력
@@ -52,7 +64,7 @@ state = calendar(
     options=calendar_options,
     custom_css="""
     .fc-event-title {
-        font-weight: 600;
+        font-weight: 700;
     }
     .fc-toolbar-title {
         font-size: 1.5rem;
